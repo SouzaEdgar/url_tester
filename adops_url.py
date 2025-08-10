@@ -25,6 +25,19 @@ def status_code(response):
     else:
         return response
 
+def redirects_hist(response):
+    if isinstance(response, requests.Response):
+        redirect_chain = []
+
+        for i, resp in enumerate(response.history, 1):
+            redirect_chain.append(f"{i}. {resp.url}") # add cada URL da corrente
+        redirect_chain.append(f"{len(response.history) +1}. {response.url}") # add a URL final
+
+        return "\n".join(redirect_chain)
+    else:
+        return response
+
 resposta = get_response(url)
 print(resposta)
 print(status_code(resposta))
+print(redirects_hist(resposta))
