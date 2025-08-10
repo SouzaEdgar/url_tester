@@ -1,11 +1,22 @@
 import requests 
 
-url = "https://google.com"
+url = "http://google.com" # redirect -> "https://google.com" (HTTP -> HTTPS)
 
-try:
-    response = requests.get(url)
-    print(f"Status Code: {response.status_code}")
-    print(f"URL final: {response.url}")
-    print(f"Redirecionamentos: {response.history}")
-except requests.exceptions.RequestException as e:
-    print(f"Erro: {e}")
+
+def get_response(url):
+    try:
+        response = requests.get(url)
+        return response
+    except requests.exceptions.RequestException as e:
+        # tratar a mensagem de erro
+        return str(e)
+
+def status_code(response):
+    if isinstance(response, requests.Response):
+        return response.status_code
+    else:
+        return response
+
+resposta = get_response(url)
+print(resposta)
+print(status_code(resposta))
