@@ -2,9 +2,14 @@ import requests
 import re
 
 #url = "http://google.com" # redirect -> "https://google.com" (HTTP -> HTTPS)
-with open("url.txt", "r") as r:
-    url = r.readline().strip()
 
+# Ler multiplas URLs
+with open("url.txt", "r") as u:
+    urls = []
+    for line in u:
+        line = line.strip()
+        if line != "":
+            urls.append(line)
 
 def get_response(url):
     headers = {
@@ -21,11 +26,15 @@ def get_response(url):
 
 def status_code(response):
     if isinstance(response, requests.Response):
-        return response.status_code
+        status = []
+        for resp in response.history:
+            status.append(resp.status_code) # add o status de cada URL
+        status.append(response.status_code) # add o status da ultima URL
+        return status
     else:
         return response
 
-def redirects_hist(response):
+def redirects_history(response):
     if isinstance(response, requests.Response):
         redirect_chain = []
 
@@ -37,7 +46,9 @@ def redirects_hist(response):
     else:
         return response
 
-resposta = get_response(url)
-print(resposta)
-print(status_code(resposta))
-print(redirects_hist(resposta))
+for url in urls:
+    resposta = get_response(url)
+    #print(resposta)
+    print(status_code(resposta))
+    #print(redirects_history(resposta))
+    print()
