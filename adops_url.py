@@ -24,31 +24,32 @@ def get_response(url):
         # tratar a mensagem de erro
         return str(e)
 
-def status_code(response):
-    if isinstance(response, requests.Response):
-        status = []
-        for resp in response.history:
-            status.append(resp.status_code) # add o status de cada URL
-        status.append(response.status_code) # add o status da ultima URL
-        return status
-    else:
-        return response
+def status_code(response: requests.Response):
+    status = []
+    for resp in response.history:
+        status.append(resp.status_code) # add o status de cada URL
+    status.append(response.status_code) # add o status da ultima URL
+    return status
 
-def redirects_history(response):
-    if isinstance(response, requests.Response):
-        redirect_chain = []
+def redirects_history(response: requests.Response):
+    redirect_chain = []
 
-        for i, resp in enumerate(response.history, 1):
-            redirect_chain.append(f"{i}. {resp.url}") # add cada URL da corrente
-        redirect_chain.append(f"{len(response.history) +1}. {response.url}") # add a URL final
+    for i, resp in enumerate(response.history, 1):
+        redirect_chain.append(f"{i}. {resp.url}") # add cada URL da corrente
+    redirect_chain.append(f"{len(response.history) +1}. {response.url}") # add a URL final
 
-        return "\n".join(redirect_chain)
-    else:
-        return response
+    return "\n".join(redirect_chain)
+
+# Criar função de identificar parametros
+def parameters_identifier(response: requests.Response, parameters):
+    parameters = []
+    return parameters
 
 for url in urls:
     resposta = get_response(url)
-    #print(resposta)
-    print(status_code(resposta))
-    #print(redirects_history(resposta))
-    print()
+    if isinstance(resposta, requests.Response):
+        print(status_code(resposta))
+        print(redirects_history(resposta))
+        print()
+    else:
+        print(resposta) # Mensagem de erro
