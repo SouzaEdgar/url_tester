@@ -34,22 +34,29 @@ def status_code(response: requests.Response):
 def redirects_history(response: requests.Response):
     redirect_chain = []
 
-    for i, resp in enumerate(response.history, 1):
-        redirect_chain.append(f"{i}. {resp.url}") # add cada URL da corrente
-    redirect_chain.append(f"{len(response.history) +1}. {response.url}") # add a URL final
+    for resp in response.history:
+        redirect_chain.append(resp.url) # add cada URL da corrente
+    redirect_chain.append(response.url) # add a URL final
+    return redirect_chain
 
-    return "\n".join(redirect_chain)
+def parameters_search(response: requests.Response, parameters: list):
+    url = response.url
+    found_params = [] # Criar uma lista de tuplas (findall retorna tupla)
 
-# Criar função de identificar parametros
-def parameters_identifier(response: requests.Response, parameters):
-    parameters = []
-    return parameters
+    for x in parameters:
+        match = re.findall(rf"(?:[?&])([^=&#]*{re.escape(x)}[^=&#]*)=([^&#]*)", url)
+        if match:
+            found_params.extend(match)
+    return found_params
 
 for url in urls:
     resposta = get_response(url)
     if isinstance(resposta, requests.Response):
         print(status_code(resposta))
         print(redirects_history(resposta))
+        parametro = ["aaaa", "bbb", "gws", "utm_source", "utm_ad", "teste"]
+        print(parameters_search(resposta, parametro))
         print()
     else:
         print(resposta) # Mensagem de erro
+        print()
