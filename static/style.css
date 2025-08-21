@@ -5,7 +5,11 @@
 }
 
 body {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
 }
 
 #title_1 {
@@ -13,26 +17,22 @@ body {
 }
 
 /* ===== Formulário ===== */
-.txt_area {
-    margin: 15px;
-}
-
-button {
-    margin: 15px 0px 15px 0px;
-}
-
 form {
-    display: flex;
+    margin: 20px 0;
+    display: inline-block;
 }
 
 /* ===== Tabela ===== */
-#linha_resultado > td {
+.linha_resultado > td, .linha_resultado a {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 table {
-    margin: 0 auto;
-    height: 20vh;
+    margin: 20px 40vh;
+    border-collapse: collapse;
+    text-align: center;
 }
 
-
+.linha_resultado a {
+    justify-content: flex-start;
+}
