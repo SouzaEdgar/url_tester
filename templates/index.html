@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de URL</title>
+</head>
+<body>
+    <h1>Verificar Status da URL</h1>
+    <form method="POST">
+        <textarea name="url" placeholder="Insira a URL por linha" required></textarea>
+        <textarea name="parameter" placeholder="param1; param2; param3;"></textarea>
+        <button type="submit">Verificar</button>
+    </form>
+
+    {% if resultados %}
+        <table border="1">
+            <tr>
+                <th>URL Final</th>
+                <th>Parâmetros Encontrados</th>
+                <th>Status</th>
+            </tr>
+            {% for r in resultados %}
+            <tr>
+                <td>{{ r.url }}</td>
+                <td>{{ r.params }}</td>
+                <td>{{ r.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Nenhum resultado ainda.</p>
+    {% endif %}
+</body>
+</html>
