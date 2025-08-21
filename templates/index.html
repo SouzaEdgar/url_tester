@@ -2,25 +2,26 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Teste de URL</title>
 </head>
 <body>
-    <h1>Verificar Status da URL</h1>
+    <h1 id="title_1">Verificar Status da URL</h1>
     <form method="POST">
-        <textarea name="url" placeholder="Insira a URL por linha" required></textarea>
-        <textarea name="parameter" placeholder="param1; param2; param3;"></textarea>
+        <textarea name="url" class="txt_area" placeholder="Insira a URL por linha" required></textarea>
+        <textarea name="parameter" class="txt_area" placeholder="param1; param2; param3;"></textarea>
         <button type="submit">Verificar</button>
     </form>
 
     {% if resultados %}
         <table border="1">
-            <tr>
+            <tr id="linha_titulo">
                 <th>URL Final</th>
                 <th>Parâmetros Encontrados</th>
                 <th>Status</th>
             </tr>
             {% for r in resultados %}
-            <tr>
+            <tr id="linha_resultado">
                 <td>{{ r.url }}</td>
                 <td>{{ r.params }}</td>
                 <td>{{ r.status }}</td>

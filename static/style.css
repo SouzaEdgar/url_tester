@@ -1,0 +1,38 @@
+/* =====  Geral ===== */
+* {
+    margin: 0;
+    font-family: cursive;
+}
+
+body {
+    text-align: center;
+}
+
+#title_1 {
+    margin: 25px;
+}
+
+/* ===== Formulário ===== */
+.txt_area {
+    margin: 15px;
+}
+
+button {
+    margin: 15px 0px 15px 0px;
+}
+
+form {
+    display: flex;
+}
+
+/* ===== Tabela ===== */
+#linha_resultado > td {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+table {
+    margin: 0 auto;
+    height: 20vh;
+}
+
+
