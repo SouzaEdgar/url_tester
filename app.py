@@ -19,16 +19,12 @@ def home():
 
         # ----- Parametros ----- 
         raw_params = request.form.get("parameter", "")
-        print(f"{raw_params} <- raw")
         user_params = re.split(r"[;\n,]+", raw_params)
-        print(f"{user_params} <- edited")
         params = []
         for param in user_params:
             param = param.strip()
-            print(param)
             if param:
                 params.append(param)
-                print(params)
         
         # ----- Trabalhar com cada URL ----- 
         for url in urls:
