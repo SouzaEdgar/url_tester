@@ -23,6 +23,11 @@ def get_response(url):
     except requests.exceptions.RequestException as e:
         # tratar a mensagem de erro
         return str(e)
+    
+def verify_response(response: requests.Response):
+    if isinstance(response, requests.Response):
+        return 1
+    return 0
 
 def status_code(response: requests.Response):
     status = []

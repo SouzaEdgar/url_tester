@@ -29,15 +29,17 @@ def home():
         # ----- Trabalhar com cada URL ----- 
         for url in urls:
             resposta = adops.get_response(url)
-            url_final = adops.redirects_history(resposta)
-            parametros = adops.parameters_search(resposta, params)
-            status_final = adops.status_code(resposta)
+            if adops.verify_response(resposta):
+                print(f"PASSOU!\n{adops.verify_response(resposta)}")
+                url_final = adops.redirects_history(resposta)
+                parametros = adops.parameters_search(resposta, params)
+                status_final = adops.status_code(resposta)
 
-            resultados.append({
-                "url": url_final[-1],
-                "params": parametros,
-                "status": status_final[-1]
-            })
+                resultados.append({
+                    "url": url_final[-1],
+                    "params": parametros,
+                    "status": status_final[-1]
+                })
 
     return render_template("index.html", resultados=resultados)
 
