@@ -9,7 +9,7 @@ def home():
     resultados = []
 
     if request.method == "POST":
-        # ----- URLs ----- 
+        # ===== URLs ===== 
         user_urls = request.form.get("url", "").splitlines()
         urls = []
         for linha in user_urls:
@@ -17,7 +17,7 @@ def home():
             if linha: # <--- ignorar linhas vazias
                 urls.append(linha)
 
-        # ----- Parametros ----- 
+        # ===== Parametros ===== 
         raw_params = request.form.get("parameter", "")
         user_params = re.split(r"[;\n,]+", raw_params)
         params = []
@@ -26,7 +26,7 @@ def home():
             if param:
                 params.append(param)
         
-        # ----- Trabalhar com cada URL ----- 
+        # ===== Trabalhar com cada URL ===== 
         for url in urls:
             resposta = adops.get_response(url)
             if adops.verify_response(resposta):
