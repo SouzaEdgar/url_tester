@@ -27,15 +27,16 @@ def home():
                 params.append(param)
         
         # ===== Trabalhar com cada URL ===== 
-        for url in urls:
+        for i, url in enumerate(urls, start=1):
             resposta = adops.get_response(url)
             if adops.verify_response(resposta):
-                print(f"PASSOU!\n{adops.verify_response(resposta)}")
+                print(i, resposta)
                 url_final = adops.redirects_history(resposta)
                 parametros = adops.parameters_search(resposta, params)
                 status_final = adops.status_code(resposta)
 
                 resultados.append({
+                    "position" : i,
                     "url": url_final[-1],
                     "params": parametros,
                     "status": status_final[-1]

@@ -16,13 +16,15 @@
     {% if resultados %}
         <table border="1">
             <tr id="linha_titulo">
+                <th>Posição</th>
                 <th>URL Final</th>
                 <th>Parâmetros Encontrados</th>
                 <th>Status</th>
             </tr>
             {% for r in resultados %}
-            <tr id="linha_resultado">
-                <td>{{ r.url }}</td>
+            <tr class="linha_resultado">
+                <td>{{ r.position }}</td>
+                <td><a href="{{ r.url }}">{{ r.url }}</a></td>
                 <td>{{ r.params }}</td>
                 <td>{{ r.status }}</td>
             </tr>
