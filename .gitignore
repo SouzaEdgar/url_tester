@@ -1,2 +1,5 @@
 ignore/
 url.txt
+__pycache__/functions.cpython-313.pyc
+__pycache__/
+*.pyc
