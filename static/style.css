@@ -23,8 +23,12 @@ form {
 }
 
 /* ===== Tabela ===== */
-.linha_resultado > td, .linha_resultado a {
+.urls {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 80%;
+}
+.params {
+    width: 20%;
 }
 
 table {
@@ -33,6 +37,6 @@ table {
     text-align: center;
 }
 
-.linha_resultado a {
-    justify-content: flex-start;
+.params, .urls {
+    text-align: start;
 }
