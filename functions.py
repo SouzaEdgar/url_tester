@@ -38,6 +38,6 @@ def parameters_search(response: requests.Response, parameters: list):
     found_params = [] # Criar uma lista de tuplas (findall retorna tupla)
     for x in parameters:
         match = re.findall(rf"(?:[?&])([^=&#]*{re.escape(x)}[^=&#]*)=([^&#]*)", url)
-        if match:
-            found_params.extend(match)
+        #if match:
+        found_params.extend(match)
     return found_params

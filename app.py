@@ -33,12 +33,15 @@ def home():
                 print(i, resposta)
                 url_final = adops.redirects_history(resposta)
                 parametros = adops.parameters_search(resposta, params)
+                print(parametros)
+                # passar os parametros para string
+                parametros_str = f"<ul>{"".join([f"<li><b>{k}:</b> {v}</li>" for k, v in parametros])}</ul>"
                 status_final = adops.status_code(resposta)
 
                 resultados.append({
                     "position" : i,
                     "url": url_final[-1],
-                    "params": parametros,
+                    "params": parametros_str,
                     "status": status_final[-1]
                 })
 

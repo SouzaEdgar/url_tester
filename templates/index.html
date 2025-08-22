@@ -23,10 +23,10 @@
             </tr>
             {% for r in resultados %}
             <tr class="linha_resultado">
-                <td>{{ r.position }}</td>
-                <td><a href="{{ r.url }}">{{ r.url }}</a></td>
-                <td>{{ r.params }}</td>
-                <td>{{ r.status }}</td>
+                <td class="position">{{ r.position }}</td>
+                <td class="urls"><a href="{{ r.url }}">{{ r.url }}</a></td>
+                <td class="params">{{ r.params|safe }}</td>
+                <td class="status">{{ r.status }}</td>
             </tr>
             {% endfor %}
         </table>
