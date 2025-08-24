@@ -10,7 +10,7 @@ async def get_response_async(url):
     }
     async with httpx.AsyncClient() as client:
         try:
-            response = await client.get(url, headers=headers, follow_redirects=True, timeout=10)
+            response = await client.get(url, headers=headers, follow_redirects=True, timeout=15.0)
             return response
         except httpx.RequestError as e:
             return str(e)
@@ -19,7 +19,7 @@ async def process_urls_async(urls, params):
     # ===== TAREFAS (coroutines) =====
     tarefas = []
     for url in urls:
-        tarefas.append(adops.get_response_async(url)) # Não é executado, apenas criou a coroutine
+        tarefas.append(get_response_async(url)) # Não é executado, apenas criou a coroutine
 
     responses = await asyncio.gather(*tarefas) # Executa as tarefas em paralelo
 
@@ -27,9 +27,8 @@ async def process_urls_async(urls, params):
     resultados = []
     for i, resp in enumerate(responses, start=1):
         if isinstance(resp, httpx.Response): # Se for valido 
-            parametros = adops.parameters_search(resp.url, params)
+            parametros = adops.parameters_search(str(resp.url), params)
             parametros_str = f"<ul>{"".join([f"<li><b>{k}:</b> {v}</li>" for k, v in parametros])}</ul>"
-            print(f"{i}, {resp}\n{parametros}")
             resultados.append({
                 "position": i,
                 "url": resp.url,
@@ -39,7 +38,7 @@ async def process_urls_async(urls, params):
         else:
             resultados.append({
                 "position": i,
-                "url": str(resp),
+                "url": urls[i -1],
                 "params": "",
                 "status": "Erro"
             })
