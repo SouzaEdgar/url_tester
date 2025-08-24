@@ -1,52 +1,27 @@
-import re
 import httpx
 import asyncio
 from utils import functions as adops
 
-def process_urls(urls_raw: list, params_raw: str):
-    resultados = []
+async def get_response_async(url):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                      "AppleWebKit/537.36 (KHTML, like Gecko)"
+                      "Chrome/115.0 Safari/537.36"
+    }
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(url, headers=headers, follow_redirects=True, timeout=10)
+            return response
+        except httpx.RequestError as e:
+            return str(e)
 
-    # ===== Tratar - URL ===== 
-    urls = []
-    for u in urls_raw:
-        if u.strip():
-            urls.append(u.strip())
-
-    # ===== Trata - Parametros ===== 
-    user_params = re.split(r"[;\n,]+", params_raw)
-    params = []
-    for p in user_params:
-        if p.strip():
-            params.append(p.strip())
-
-    # ===== Trabalhar com cada URL =====
-    for i, url in enumerate(urls, start=1):
-        resposta = adops.get_response(url)
-
-        if adops.verify_response(resposta):
-            url_final = resposta.url
-            parametros = adops.parameters_search(url_final, params)
-            parametros_str = f"<ul>{"".join([f"<li><b>{k}:</b> {v}</li>" for k, v in parametros])}</ul>"
-            print(f"{i}, {resposta}\n{parametros}")
-            resultados.append({
-                "position": i,
-                "url": url_final,
-                "params": parametros_str,
-                "status": resposta.status_code
-            })
-
-    return resultados
-
-# Testar processamento assincrono
 async def process_urls_async(urls, params):
-    tarefas = [] # Se trata de uma lista de coroutines
+    # ===== TAREFAS (coroutines) =====
+    tarefas = []
     for url in urls:
         tarefas.append(adops.get_response_async(url)) # Não é executado, apenas criou a coroutine
-    
-    #grupo_tarefas = asyncio.gather(*tarefas)
 
-    # Executa as tarefas
-    responses = await asyncio.gather(*tarefas)
+    responses = await asyncio.gather(*tarefas) # Executa as tarefas em paralelo
 
     # ===== Trabalhar com cada URL =====
     resultados = []
@@ -61,5 +36,11 @@ async def process_urls_async(urls, params):
                 "params": parametros_str,
                 "status": resp.status_code
             })
+        else:
+            resultados.append({
+                "position": i,
+                "url": str(resp),
+                "params": "",
+                "status": "Erro"
+            })
     return resultados
-    

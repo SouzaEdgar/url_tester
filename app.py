@@ -1,11 +1,13 @@
-from flask import Flask
-from routes.main_routes import main_bp
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from routes import main_routes
 
-def create_app():
-    app = Flask(__name__)
-    app.register_blueprint(main_bp) # Registra rotas
-    return app
+app = FastAPI()
 
-if __name__ == "__main__":
-    app = create_app()
-    app.run(debug=True)
+# ===== Monta - Static / Templates =====
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+# ===== Rotas =====
+app.include_router(main_routes.router)
