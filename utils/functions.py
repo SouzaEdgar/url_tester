@@ -17,3 +17,7 @@ def parameters_search(url, parameters: list):
         match = re.findall(rf"(?:[?&])([^=&#]*{re.escape(x)}[^=&#]*)=([^&#]*)", url)
         found_params.extend(match)
     return found_params
+
+def valid_url(url):
+    regex = re.compile(r"^(https?://)?([\w.-]+)(:[0-9]+)?(/.*)?$")
+    return bool(regex.match(url))
