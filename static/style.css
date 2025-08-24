@@ -27,6 +27,9 @@ form {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 80%;
 }
+.urls a{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 .params {
     width: 20%;
 }
