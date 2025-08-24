@@ -11,33 +11,20 @@ def get_response(url):
         response = requests.get(url, headers=headers, allow_redirects=True)
         return response
     except requests.exceptions.RequestException as e:
-        # tratar a mensagem de erro
         return str(e)
     
 def verify_response(response: requests.Response):
-    if isinstance(response, requests.Response):
-        return 1
-    return 0
+    return isinstance(response, requests.Response) # Retorna booleano
 
 def status_code(response: requests.Response):
-    status = []
-    for resp in response.history:
-        status.append(resp.status_code) # add o status de cada URL
-    status.append(response.status_code) # add o status da ultima URL
-    return status
+    return [resp.status_code for resp in response.history] + [response.status_code] # Retorna a lista status code dos redirects + o status_code da url final
 
 def redirects_history(response: requests.Response):
-    redirect_chain = []
-    for resp in response.history:
-        redirect_chain.append(resp.url) # add cada URL da corrente
-    redirect_chain.append(response.url) # add a URL final
-    return redirect_chain
+    return [resp.url for resp in response.history] + [response.url] # Retorna a lista dos redirects + a url final
 
 def parameters_search(url, parameters: list):
-    #url = response.url
     found_params = [] # Criar uma lista de tuplas (findall retorna tupla)
     for x in parameters:
         match = re.findall(rf"(?:[?&])([^=&#]*{re.escape(x)}[^=&#]*)=([^&#]*)", url)
-        #if match:
         found_params.extend(match)
     return found_params
