@@ -1,4 +1,6 @@
 import re
+import httpx
+import asyncio
 from utils import functions as adops
 
 def process_urls(urls_raw: list, params_raw: str):
@@ -25,7 +27,7 @@ def process_urls(urls_raw: list, params_raw: str):
             url_final = resposta.url
             parametros = adops.parameters_search(url_final, params)
             parametros_str = f"<ul>{"".join([f"<li><b>{k}:</b> {v}</li>" for k, v in parametros])}</ul>"
-
+            print(f"{i}, {resposta}\n{parametros}")
             resultados.append({
                 "position": i,
                 "url": url_final,
@@ -34,3 +36,30 @@ def process_urls(urls_raw: list, params_raw: str):
             })
 
     return resultados
+
+# Testar processamento assincrono
+async def process_urls_async(urls, params):
+    tarefas = [] # Se trata de uma lista de coroutines
+    for url in urls:
+        tarefas.append(adops.get_response_async(url)) # Não é executado, apenas criou a coroutine
+    
+    #grupo_tarefas = asyncio.gather(*tarefas)
+
+    # Executa as tarefas
+    responses = await asyncio.gather(*tarefas)
+
+    # ===== Trabalhar com cada URL =====
+    resultados = []
+    for i, resp in enumerate(responses, start=1):
+        if isinstance(resp, httpx.Response): # Se for valido 
+            parametros = adops.parameters_search(resp.url, params)
+            parametros_str = f"<ul>{"".join([f"<li><b>{k}:</b> {v}</li>" for k, v in parametros])}</ul>"
+            print(f"{i}, {resp}\n{parametros}")
+            resultados.append({
+                "position": i,
+                "url": resp.url,
+                "params": parametros_str,
+                "status": resp.status_code
+            })
+    return resultados
+    
