@@ -67,7 +67,7 @@ body {
 /* ===== Tabela ===== */
 .table-container {
     width: 100%;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     overflow-x: auto;
     margin-top: 20px;
 }
@@ -90,11 +90,15 @@ th {
     padding: 12px;
     font-weight: bold;
 }
-
+/* th:nth-child(1), td:nth-child(1) { width: 5%; }  Posição */
+th:nth-child(2), td:nth-child(2) { width: 55%; } /* URL Final */
+th:nth-child(3), td:nth-child(3) { width: 25%; } /* Parâmetros */
+th:nth-child(4), td:nth-child(4) { width: 15%; } /* Status */
 /* --- linhas --- */
 td {
     padding: 10px;
     border-top: 1px solid #ddd;
+    vertical-align: top;
 }
 
 tr:nth-child(even) {
@@ -104,8 +108,10 @@ tr:nth-child(even) {
 /* --- urls --- */
 .urls {
     font-family: monospace;
-    word-break: break-word;
-    text-align: start;
+    word-break: break-all;
+    white-space: pre-wrap;
+    text-align: left;
+    overflow-wrap: anywhere; /* quebrar em qualquer momento */
 }
 
 .urls a {
@@ -119,8 +125,10 @@ tr:nth-child(even) {
 
 /* --- parâmetros --- */
 .params {
-    text-align: start;
+    text-align: left;
     color: #555;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 
 /* --- status --- */
