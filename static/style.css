@@ -1,45 +1,136 @@
 /* =====  Geral ===== */
 * {
     margin: 0;
-    font-family: cursive;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
+    background: #f0f2f3;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
+    padding: 20px;
 }
 
 #title_1 {
     margin: 25px;
+    font-size: 2rem;
+    color: #333;
 }
 
 /* ===== Formulário ===== */
-form {
+.form-container {
     margin: 20px 0;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.txt-area {
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.95rem;
+    resize: vertical;
+    transition: border 0.3s;
+}
+
+.txt-area:focus {
+    border-color: #4f46e5;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.btn {
+    background: rgba(78, 70, 229, 0.9);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0056b3;
 }
 
 /* ===== Tabela ===== */
-.urls {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    width: 80%;
-}
-.urls a{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-.params {
-    width: 20%;
+.table-container {
+    width: 100%;
+    max-width: 1000px;
+    overflow-x: auto;
+    margin-top: 20px;
 }
 
 table {
-    margin: 20px 40vh;
-    border-collapse: collapse;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0; /* remove espaço extra */
     text-align: center;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.params, .urls {
+/* --- cabeçalho --- */
+th {
+    background-color: rgba(78, 70, 229, 0.9);
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+}
+
+/* --- linhas --- */
+td {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background: #f2f6fc; /* cor alternada */
+}
+
+/* --- urls --- */
+.urls {
+    font-family: monospace;
+    word-break: break-word;
     text-align: start;
+}
+
+.urls a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.urls a:hover {
+    text-decoration: underline;
+}
+
+/* --- parâmetros --- */
+.params {
+    text-align: start;
+    color: #555;
+}
+
+/* --- status --- */
+.status {
+    font-weight: bold;
+}
+
+/* --- caso não tenha resultado --- */
+.sem-resultado {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #555;
 }
