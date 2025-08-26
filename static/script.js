@@ -4,7 +4,8 @@ document.getElementById("form-url-param").addEventListener("submit", async funct
 
     const formData = new FormData(this);
 
-    const tabelinha = document.querySelector(".table-container");
+    document.querySelector("thead").className = "";
+    const tabelinha = document.querySelector("#results_body");
 
     // ----- Loading da Tabela *-* ----- //
     tabelinha.innerHTML = `
