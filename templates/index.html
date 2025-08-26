@@ -8,9 +8,11 @@
 <body>
     <h1 id="title_1">Verificar Status da URL</h1>
     <form method="POST" class="form-container">
-        <textarea name="url" class="txt-area" placeholder="Insira a URL por linha" required></textarea>
-        <textarea name="parameter" class="txt-area" placeholder="param1; param2; param3;"></textarea>
-        <button type="submit" class="btn">Verificar</button>
+        <div id="grid_form">
+            <textarea name="url" id="txt_url" class="txt-area" placeholder="Insira a URL por linha" required></textarea>
+            <textarea name="parameter" id="txt_parameter" class="txt-area" placeholder="param1; param2; param3;"></textarea>
+            <button type="submit" class="btn">Verificar</button>
+        </div>
     </form>
 
     {% if resultados %}
