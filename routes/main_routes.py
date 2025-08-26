@@ -15,7 +15,8 @@ async def home(request: Request):
         {"request": request, "resultados": []}
     )
 
-@router.post("/", response_class=HTMLResponse)
+# passando a rota para ajax
+@router.post("/ajax", response_class=HTMLResponse) 
 async def process_form(
     request: Request,
     url: str = Form(...),
@@ -37,7 +38,6 @@ async def process_form(
     resultados = await process_urls_async(urls, params)
 
     return templates.TemplateResponse(
-        "index.html", 
+        "tabela.html", 
         {"request": request, "resultados": resultados}
     )
-    

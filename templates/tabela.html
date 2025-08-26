@@ -1,0 +1,8 @@
+{% for r in resultados %}
+<tr class="linha-resultado">
+    <td class="position">{{ r.position }}</td>
+    <td class="urls"><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
+    <td class="params">{{ r.params|safe }}</td>
+    <td class="status">{{ r.status }}</td>
+</tr>
+{% endfor %}

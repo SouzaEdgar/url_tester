@@ -7,35 +7,28 @@
 </head>
 <body>
     <h1 id="title_1">Verificar Status da URL</h1>
-    <form method="POST" class="form-container">
+    <form method="POST" id="form-url-param" class="form-container">
         <div id="grid_form">
             <textarea name="url" id="txt_url" class="txt-area" placeholder="Insira a URL por linha" required></textarea>
             <textarea name="parameter" id="txt_parameter" class="txt-area" placeholder="param1; param2; param3;"></textarea>
             <button type="submit" class="btn">Verificar</button>
         </div>
     </form>
-
-    {% if resultados %}
-        <div class="table-container">
-            <table>
+    <div class="table-container">
+        <table>
+            <thead>
                 <tr id="linha_titulo">
                     <th>Posição</th>
                     <th>URL Final</th>
                     <th>Parâmetros Encontrados</th>
                     <th>Status</th>
                 </tr>
-                {% for r in resultados %}
-                <tr class="linha-resultado">
-                    <td class="position">{{ r.position }}</td>
-                    <td class="urls"><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></td>
-                    <td class="params">{{ r.params|safe }}</td>
-                    <td class="status">{{ r.status }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    {% else %}
-        <p class="sem-resultado">Nenhum resultado ainda.</p>
-    {% endif %}
+            </thead>
+            <tbody id="results_body">
+                <!-- tabela resultados -->
+            </tbody>
+        </table>
+    </div>
 </body>
+<script src="/static/script.js"></script>
 </html>
