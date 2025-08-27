@@ -20,7 +20,7 @@ document.getElementById("form-url-param").addEventListener("submit", async funct
 
     try {
         // usar a rota ajax
-        const response = await fetch("/ajax", {
+        const response = await fetch("/verificar", {
             method: "POST",
             body: formData
         });

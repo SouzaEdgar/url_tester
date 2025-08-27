@@ -16,7 +16,7 @@ async def home(request: Request):
     )
 
 # passando a rota para ajax
-@router.post("/ajax", response_class=HTMLResponse) 
+@router.post("/verificar", response_class=HTMLResponse) 
 async def process_form(
     request: Request,
     url: str = Form(...),
