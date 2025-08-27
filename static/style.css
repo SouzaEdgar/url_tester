@@ -89,8 +89,7 @@ body {
 /* ===== Tabela ===== */
 .table-container {
     width: 70%;
-    /* max-width: 1000px; */
-    overflow-x: auto;
+    /* max-height: 100vh; */
     margin-top: 20px;
     box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
 }
@@ -101,26 +100,27 @@ table {
     border-spacing: 0; /* remove espaço extra */
     text-align: center;
     background: white;
-    border-radius: 10px;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 /* --- cabeçalho --- */
-th {
+thead th {
+    position: sticky;
+    z-index: 3;
+    top: 0;
     background-color: rgba(78, 70, 229, 0.9);
     color: white;
     padding: 12px;
     font-weight: bold;
     border-right: 1px solid rgba(78, 70, 229, 0.6);
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
 }
 /* th:nth-child(1), td:nth-child(1) { width: 5%; }  Posição */
 th:nth-child(2), td:nth-child(2) { width: 55%; } /* URL Final */
 th:nth-child(3), td:nth-child(3) { width: 25%; } /* Parâmetros */
 th:nth-child(4), td:nth-child(4) { width: 15%; } /* Status */
 
-th:last-child, td:last-child {
-    border-right: none;
-}
 /* --- linhas --- */
 td {
     padding: 10px;

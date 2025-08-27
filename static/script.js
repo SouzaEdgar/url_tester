@@ -30,7 +30,8 @@ document.getElementById("form-url-param").addEventListener("submit", async funct
         // injeta os resultados
         tabelinha.innerHTML = html;
         // move a tela para a tabela quando aparecer
-        tabelinha.scrollIntoView({ behavior: "smooth", block: "start" });
+        const tabela = document.querySelector("table");
+        tabela.scrollIntoView({ behavior: "smooth", block: "start" });
 
     } catch (error) {
         tabelinha.innerHTML = `
