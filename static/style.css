@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Arial Rounded MT Bold";
 }
 
 body {
@@ -43,7 +43,6 @@ body {
     font-size: 1.2rem;
     resize: vertical;
     transition: border 0.3s;
-    font-family: cursive;
 }
 
 .txt-area:focus, .txt-area:hover {
